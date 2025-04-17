@@ -5,22 +5,22 @@ module(
     repo_name = "com_google_template_soy",
 )
 
-bazel_dep(name = "rules_java", version = "5.5.0")
+bazel_dep(name = "rules_java", version = "8.11.0")
 bazel_dep(name = "protobuf", version = "21.7", repo_name = "com_google_protobuf")
 bazel_dep(name = "rules_proto", version = "5.3.0-21.7")
+bazel_dep(name = "rules_jvm_external", version = "6.7")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 
 #####################################################################
 # rules_jvm_external
 #####################################################################
-
-bazel_dep(name = "rules_jvm_external", version = "5.2")
 
 SERVER_URLS = [
     "https://mirror.bazel.build/repo1.maven.org/maven2",
     "https://repo1.maven.org/maven2",
 ]
 
-maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.artifact(
     # testonly = True,
     artifact = "guava-testlib",
