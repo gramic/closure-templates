@@ -34,12 +34,14 @@ CODE_GENERATION = [
     "BaseSoyTemplateImpl.java",
 ]
 
+CODE_GEN_TEST_ONLY = [
+    "PartialTemplateBuilder.java",
+]
+
 TEMPLATE = [
     "CssParam.java",
     "SoyTemplate.java",
-    "PartialSoyTemplate.java",
     "SoyTemplateParam.java",
-    "TemplateInterface.java",
 ]
 
 TEMPLATE_UTIL = [
@@ -50,23 +52,13 @@ TEMPLATE_RESTRICTED_UTIL = [
     "SoyTemplatesRestrictedApi.java",
 ]
 
-RECORD_PROPERTY = ["RecordProperty.java"]
-
-java_library(
-    name = "record_property",
-    srcs = RECORD_PROPERTY,
-    visibility = ["//visibility:public"],
-)
-
 java_library(
     name = "template",
     srcs = TEMPLATE,
     visibility = ["//visibility:public"],
     deps = [
-        ":record_property",
-        "@com_google_auto_value_auto_value",
+        "@google_bazel_common//third_party/java/auto:value",
         "@maven//:com_google_common_html_types_types",
-        "@maven//:com_google_errorprone_error_prone_annotations",
         "@maven//:com_google_guava_guava",
     ],
 )
@@ -99,21 +91,19 @@ java_library(
             "restricted/*.java",
             "internal/*.java",
         ],
-        exclude = LOCKED_DOWN + ACTUAL_INTERNAL + VE + CODE_GENERATION + TEMPLATE + TEMPLATE_UTIL + TEMPLATE_RESTRICTED_UTIL + RECORD_PROPERTY,
+        exclude = LOCKED_DOWN + ACTUAL_INTERNAL + VE + CODE_GENERATION + TEMPLATE + TEMPLATE_UTIL + TEMPLATE_RESTRICTED_UTIL + CODE_GEN_TEST_ONLY,
     ),
     visibility = ["//visibility:public"],
     exports = [
         ":template",
     ],
     deps = [
-        ":record_property",
         ":template",
         "//java/src/com/google/template/soy/base/internal",
-        "//java/src/com/google/template/soy/internal/base",
         "//java/src/com/google/template/soy/internal/proto",
         "//java/src/com/google/template/soy/jbcsrc/api:helpers",
         "//java/src/com/google/template/soy/jbcsrc/shared:names",
-        "@com_google_auto_value_auto_value",
+        "@google_bazel_common//third_party/java/auto:value",
         "@com_google_protobuf//:protobuf_java",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_common_html_types_types",
@@ -128,9 +118,6 @@ java_library(
     srcs = ACTUAL_INTERNAL,
     deps = [
         ":data",
-        ":record_property",
-        "//java/src/com/google/template/soy/soytree:metadata",
-        "//java/src/com/google/template/soy/types",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_guava_guava",
     ],
@@ -142,7 +129,7 @@ java_library(
     deps = [
         ":data",
         "//src/main/protobuf:ve_metadata_java_proto",
-        "@com_google_auto_value_auto_value",
+        "@google_bazel_common//third_party/java/auto:value",
         "@com_google_protobuf//:protobuf_java",
         "@maven//:com_google_code_findbugs_jsr305",
     ],
@@ -154,10 +141,7 @@ java_library(
     visibility = ["//visibility:public"],
     deps = [
         ":data",
-        ":record_property",
-        "//java/src/com/google/template/soy/jbcsrc/api:helpers",
-        "//java/src/com/google/template/soy/jbcsrc/shared",
-        "@com_google_auto_value_auto_value",
+        "@google_bazel_common//third_party/java/auto:value",
         "@com_google_protobuf//:protobuf_java",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_common_html_types_types",

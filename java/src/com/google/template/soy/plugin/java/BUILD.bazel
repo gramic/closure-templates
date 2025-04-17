@@ -18,10 +18,7 @@ load("@rules_java//java:defs.bzl", "java_library")
 
 package(default_visibility = ["//:soy_internal"])
 
-EXTERN_HELPERS_SRCS = [
-    "RenderCssHelper.java",
-    "SharedExternRuntime.java",
-]
+EXTERN_HELPERS_SRCS = ["RenderCssHelper.java"]
 
 REFLECTIVE_SRCS = ["ReflectiveMethodChecker.java"]
 
@@ -32,8 +29,7 @@ java_library(
         exclude = REFLECTIVE_SRCS + EXTERN_HELPERS_SRCS,
     ),
     deps = [
-        "//java/src/com/google/template/soy/base/internal",
-        "@com_google_auto_value_auto_value",
+        "@google_bazel_common//third_party/java/auto:value",
         "@maven//:com_google_guava_guava",
     ],
 )
@@ -50,9 +46,6 @@ java_library(
     name = "extern_helpers",
     srcs = EXTERN_HELPERS_SRCS,
     deps = [
-        "//java/src/com/google/template/soy/data",
         "@maven//:com_google_code_findbugs_jsr305",
-        "@maven//:com_google_errorprone_error_prone_annotations",
-        "@maven//:com_google_guava_guava",
     ],
 )

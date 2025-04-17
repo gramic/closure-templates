@@ -35,7 +35,7 @@ java_library(
         "//java/src/com/google/template/soy/shared/internal:escaping_library",
         "//java/src/com/google/template/soy/shared/restricted",
         "//java/src/com/google/template/soy/shared/restricted:method_annotation",
-        "@com_google_auto_value_auto_value",
+        "@google_bazel_common//third_party/java/auto:value",
         "@com_google_protobuf//:protobuf_java",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_errorprone_error_prone_annotations",

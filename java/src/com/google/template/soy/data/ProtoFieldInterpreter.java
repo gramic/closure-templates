@@ -34,7 +34,7 @@ import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.EnumDescriptor;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Descriptors.FileDescriptor.Syntax;
+import com.google.protobuf.DescriptorProtos.Edition;
 import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.Message;
 import com.google.protobuf.ProtocolMessageEnum;
@@ -595,10 +595,7 @@ public abstract class ProtoFieldInterpreter {
         // in open enums we preserve unknown enum values (for consistency with jbcsrc), but for
         // closed enums we don't, and so if the field is unknown we will return null which will
         // trigger an NPE again, for consistency with jbcsrc.
-        if (enumDescriptor.getFile().getSyntax() == Syntax.PROTO3) {
-          return enumDescriptor.findValueByNumberCreatingIfUnknown(value);
-        }
-        return enumDescriptor.findValueByNumber(value);
+        return enumDescriptor.findValueByNumberCreatingIfUnknown(value);
       }
     };
   }

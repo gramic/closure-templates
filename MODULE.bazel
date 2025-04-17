@@ -6,9 +6,10 @@ module(
 )
 
 bazel_dep(name = "rules_java", version = "8.11.0")
-bazel_dep(name = "protobuf", version = "21.7", repo_name = "com_google_protobuf")
+bazel_dep(name = "protobuf", version = "30.2", repo_name = "com_google_protobuf")
 bazel_dep(name = "rules_proto", version = "5.3.0-21.7")
 bazel_dep(name = "rules_jvm_external", version = "6.7")
+bazel_dep(name = "google_bazel_common", version = "0.0.1")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 
@@ -45,19 +46,6 @@ maven.artifact(
     group = "junit",
     version = "4.13.2",
 )
-
-# maven.override(
-#     coordinates = "com.google.auto.value:auto-value",
-#     target = "@com_google_auto_value_auto_value",
-# )
-# maven.override(
-#     coordinates = "com.google.auto.value:auto-value-annotations",
-#     target = "@com_google_auto_value_auto_value_annotations",
-# )
-# maven.override(
-#     coordinates = "com.google.protobuf:protobuf-java",
-#     target = "@com_google_protobuf//:protobuf_java",
-# )
 maven.install(
     artifacts = [
         "args4j:args4j:2.33",
@@ -93,3 +81,8 @@ use_repo(maven, "maven", "unpinned_maven")
 #   name = "soy_annotate"
 # )
 # use_repo(soy)
+
+# local_path_override(
+#     module_name = "com_google_auto_value_auto_value",
+#     path = "@google_bazel_common//third_party/java/auto:value",
+# )
