@@ -22,7 +22,9 @@ java_library(
     name = "css",
     srcs = glob(["*.java"]),
     deps = [
+        "//java/src/com/google/template/soy/base",
         "//java/src/com/google/template/soy/soytree",
+        "//java/src/com/google/template/soy/soytree:soynode",
         "@google_bazel_common//third_party/java/auto:value",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_errorprone_error_prone_annotations",

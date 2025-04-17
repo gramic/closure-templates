@@ -22,10 +22,16 @@ SEMI_PUBLIC_SOURCES = [
     "SoyError.java",
     "SoyErrors.java",
     "SoyErrorKind.java",
+    "ErrorArg.java",
+    "ErrorFormatter.java",
 ]
 
 PUBLIC_SOURCES = [
     "SoyCompilationException.java",
+]
+
+FORMATTER_SRCS = [
+    "ErrorFormatterImpl.java",
 ]
 
 java_library(
@@ -33,8 +39,22 @@ java_library(
     srcs = SEMI_PUBLIC_SOURCES,
     deps = [
         "//java/src/com/google/template/soy/base",
-        "@google_bazel_common//third_party/java/auto:value",
         "@com_google_protobuf//:protobuf_java",
+        "@google_bazel_common//third_party/java/auto:value",
+        "@maven//:com_google_code_findbugs_jsr305",
+        "@maven//:com_google_guava_guava",
+    ],
+)
+
+java_library(
+    name = "formatter",
+    srcs = FORMATTER_SRCS,
+    deps = [
+        ":error_reporter_impl",
+        ":soy_error_api",
+        "//java/src/com/google/template/soy/base",
+        "//java/src/com/google/template/soy/base/internal",
+        "//java/src/com/google/template/soy/soytree",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_guava_guava",
     ],
@@ -62,6 +82,7 @@ java_library(
         "//java/src/com/google/template/soy/base",
         "//java/src/com/google/template/soy/base/internal",
         "@google_bazel_common//third_party/java/auto:value",
+        "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_errorprone_error_prone_annotations",
         "@maven//:com_google_guava_guava",
     ],

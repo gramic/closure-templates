@@ -49,12 +49,12 @@ java_library(
       ":AutoValueProcessor",
       ":MemoizedValidator",
   ],
-  exports = ["@com_google_auto_value_auto_value_annotations"],
+  exports = ["@google_bazel_common//third_party/java/auto:value_annotations"],
 )
 """,
     generated_rule_name = "processor",
     server_urls = SERVER_URLS,
-    exports = ["@com_google_auto_value_auto_value_annotations"],
+    exports = ["@google_bazel_common//third_party/java/auto:value_annotations"],
 )
 
 # This isn't part of the maven_install above so we can set a custom visibility.
@@ -63,7 +63,7 @@ jvm_maven_import_external(
     artifact = "com.google.auto.value:auto-value-annotations:1.9",
     artifact_sha256 = "fa5469f4c44ee598a2d8f033ab0a9dcbc6498a0c5e0c998dfa0c2adf51358044",
     default_visibility = [
-        "@com_google_auto_value_auto_value//:__pkg__",
+        "@google_bazel_common//third_party/java/auto:value//:__pkg__",
         "@maven//:__pkg__",
     ],
     neverlink = True,

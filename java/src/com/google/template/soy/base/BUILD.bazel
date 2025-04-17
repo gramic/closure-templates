@@ -22,6 +22,7 @@ java_library(
     name = "base",
     srcs = glob(["*.java"]),
     deps = [
+        "//src/main/protobuf:template_metadata_java_proto",
         "@google_bazel_common//third_party/java/auto:value",
         "@maven//:com_google_code_findbugs_jsr305",
         "@maven//:com_google_errorprone_error_prone_annotations",

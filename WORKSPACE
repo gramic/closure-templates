@@ -95,8 +95,8 @@ maven_install(
     ],
     maven_install_json = "//:maven_install.json",
     override_targets = {
-        "com.google.auto.value:auto-value": "@com_google_auto_value_auto_value",
-        "com.google.auto.value:auto-value-annotations": "@com_google_auto_value_auto_value_annotations",
+        "com.google.auto.value:auto-value": "@google_bazel_common//third_party/java/auto:value",
+        "com.google.auto.value:auto-value-annotations": "@google_bazel_common//third_party/java/auto:value_annotations",
         "com.google.protobuf:protobuf-java": "@com_google_protobuf//:protobuf_java",
     },
     repositories = SERVER_URLS,
@@ -151,12 +151,12 @@ java_library(
         ":AutoValueProcessor",
         ":MemoizedValidator",
     ],
-    exports = ["@com_google_auto_value_auto_value_annotations"],
+    exports = ["@google_bazel_common//third_party/java/auto:value_annotations"],
 )
 """,
     generated_rule_name = "processor",
     server_urls = SERVER_URLS,
-    exports = ["@com_google_auto_value_auto_value_annotations"],
+    exports = ["@google_bazel_common//third_party/java/auto:value_annotations"],
 )
 
 # This isn't part of the maven_install above so we can set a custom visibility.
@@ -165,7 +165,7 @@ jvm_maven_import_external(
     artifact = "com.google.auto.value:auto-value-annotations:1.10.2",
     artifact_sha256 = "3f3b7edfaf7fbbd88642f7bd5b09487b8dcf2b9e5f3a19f1eb7b3e53f20f14ba",
     default_visibility = [
-        "@com_google_auto_value_auto_value//:__pkg__",
+        "@google_bazel_common//third_party/java/auto:value//:__pkg__",
         "@maven//:__pkg__",
     ],
     neverlink = True,
